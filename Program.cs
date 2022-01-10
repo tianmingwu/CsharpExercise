@@ -41,9 +41,12 @@ Console.WriteLine("Exercise 13:");
 LinqExercise.Exercise13.Solve();
 Console.WriteLine("\n");
 
-*/
 Console.WriteLine("Exercise 16:");
 LinqExercise.Exercise16.Solve();
+*/
+
+Console.WriteLine("Exercise 23:");
+LinqExercise.Exercise23.Solve();
 
 namespace LinqExercise
 {
@@ -210,14 +213,33 @@ namespace LinqExercise
         {
             string currentDirectory = Directory.GetCurrentDirectory();
             
-            var fileInfos = Directory.EnumerateFiles(currentDirectory)
-            .Select(file=>new FileInfo(file));
+            var fileInfos = Directory.EnumerateFiles(currentDirectory).Select(file=>new FileInfo(file));
 
             foreach(var obj in fileInfos)
             {
                 Console.WriteLine($"{obj.Name}: {obj.Length}");
             }
+
             Console.WriteLine($"The average size of the files in this directory is {fileInfos.Select(x=>x.Length).Average()}.");
+        }
+    }
+    
+    public class Exercise23
+    {   
+        static char[] set1 = {'X', 'Y', 'Z'};
+        static int[] set2 = {1, 2, 3, 4};
+        static char[] set3 = {'$', '#', '@'};
+        public static void Solve()
+        {
+            var cartesianProduct = set1.SelectMany(
+                x=> set2.SelectMany(
+                y=> set3.Select(
+                z=> new{letterList=x, numberList=y, signList=z})));
+            
+            foreach(var prod in cartesianProduct)
+            {
+                Console.WriteLine(prod);
+            }
         }
     }
 }
