@@ -1,4 +1,9 @@
-﻿/*
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+/*
 Console.WriteLine("Exercise 1:");
 LinqExercise.Exercise1.Solve();
 Console.WriteLine("\n");
@@ -43,10 +48,155 @@ Console.WriteLine("\n");
 
 Console.WriteLine("Exercise 16:");
 LinqExercise.Exercise16.Solve();
-*/
 
 Console.WriteLine("Exercise 23:");
 LinqExercise.Exercise23.Solve();
+*/
+namespace CSharpExercise
+{
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            //RecursionExercise.PrintNumber.Solve();
+            //RecursionExercise.PrintNumberBackwards.Solve();
+            //RecursionExercise.SumNaturalNumbers.Solve();
+            //RecursionExercise.TestPalindrome.Solve();
+            RecursionExercise.ReverseString.Solve();
+
+            Console.ReadLine();
+        }
+    }
+}
+
+namespace RecursionExercise
+{
+    public class PrintNumber
+    {
+        public static void Solve()
+        {
+            Console.WriteLine("Using recursive method to print n natural numbers.");
+
+            Console.Write("How many numbers to print? ");
+            int n = Convert.ToInt32(Console.ReadLine());
+
+            Print(n, 1);
+        }
+
+        private static void Print(int targetNumber, int currentNumber)
+        {
+            if (currentNumber <= targetNumber)
+            {
+                Console.Write(currentNumber + " ");
+                Print(targetNumber, currentNumber + 1);
+            }
+            else
+            {
+                Console.WriteLine();
+            }
+        }
+    }
+
+    public class PrintNumberBackwards
+    {
+        public static void Solve()
+        {
+            int n;
+            Console.WriteLine("Write a program in C# to print numbers from n to 1 using recursion.");
+
+            Console.Write("How many numbers to print: ");
+
+            n = Convert.ToInt32(Console.ReadLine());
+
+            Print(n);
+        }
+
+        static void Print(int targetNumber)
+        {
+            Console.Write($"{targetNumber} ");
+            if (targetNumber > 1)
+            {
+                Print(targetNumber - 1);
+            }
+            else
+            {
+                Console.WriteLine();
+            }
+        }
+    }
+
+    public class SumNaturalNumbers
+    {
+        public static void Solve()
+        {
+            int targetNumber, sum;
+            Console.WriteLine("Write a program in C# to find the sum of first n natural numbers using recursion.");
+
+            Console.Write("How many numbers to sum: ");
+            targetNumber = Convert.ToInt32(Console.ReadLine());
+
+            sum = Sum(targetNumber);
+
+            Console.WriteLine($"The sum of first {targetNumber} natural numbers is {sum}.");
+        }
+        static int Sum(int targetNumber)
+        {
+            return targetNumber == 0 ? 0 : targetNumber + Sum(targetNumber - 1);
+        }
+    }
+
+    public class TestPalindrome
+    {
+        public static void Solve()
+        {
+            string userInputString, resultString;
+
+            Console.WriteLine("Check whether a given string is Palindrome or not using recursion.");
+            Console.Write("Please input a string: ");
+
+            userInputString = Console.ReadLine();
+
+            resultString = IsPalindrome(userInputString) ? "" : "not ";
+
+            Console.WriteLine($"{userInputString} is {resultString}a palindrome.");
+        }
+        private static bool IsPalindrome(string str)
+        {
+            int strLength = str.Length;
+            Console.WriteLine($"Checking {str}...");
+            if (strLength <= 1)
+            {
+                return true;
+            }
+            else
+            {
+                return (str.First() == str.Last()) && IsPalindrome(str.Substring(1, strLength - 2));
+            }
+        }
+    }
+
+    public class ReverseString
+    {
+        public static void Solve()
+        {
+            Console.Write("Reverse string. Please input a string: ");
+            string userInputString = Console.ReadLine();
+
+            string revStr = RevStr(userInputString);
+            Console.WriteLine($"Reversed string is {revStr}.");
+        }
+
+        private static string RevStr(string str)
+        {
+            if (str.Length == 1)
+                return str;
+            else
+            {
+                return RevStr(str.Substring(1, str.Length - 1)) + str.Substring(0, 1);
+            }
+        }
+    }
+}
 
 namespace LinqExercise
 {
@@ -120,7 +270,7 @@ namespace LinqExercise
     }
     public class Exercise5
     {   
-        private static string? InputString;
+        private static string InputString;
         public static void Solve()
         {
             Console.Write("Input the string: ");
@@ -197,7 +347,7 @@ namespace LinqExercise
             int numberElements = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine($"Input {numberElements} strings for the array:");
 
-            string?[] stringArray = new string[numberElements];
+            string[] stringArray = new string[numberElements];
             for (int i=0;i<numberElements;i++)
             {
                 Console.Write($"Element[{i}]: ");
